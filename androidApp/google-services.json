@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1078478554677",
+    "project_id": "fir-loginkmm-ddd58",
+    "storage_bucket": "fir-loginkmm-ddd58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078478554677:android:e7cf90f00dbee81cecd37c",
+        "android_client_info": {
+          "package_name": "vara17.LoginFirebaseKMMApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBufhCGcDSouEkeO8fSnrdpgyhvN47dJok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

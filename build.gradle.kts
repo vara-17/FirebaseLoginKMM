@@ -5,4 +5,11 @@ plugins {
     id("com.android.application").apply(false)
     id("com.android.library").apply(false)
     id("org.jetbrains.compose").apply(false)
+    id("com.google.gms.google-services").version("4.3.14").apply(false)
+}
+
+buildscript {
+    dependencies {
+        //classpath("dev.icerock.moko:resources-generator:0.23.0")
+    }
 }

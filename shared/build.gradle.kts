@@ -2,6 +2,8 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jetbrains.compose")
+    kotlin("plugin.serialization") version "1.9.0"
+    //id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -15,17 +17,28 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "shared"
             isStatic = true
+            //export("dev.icerock.moko:resources:0.23.0")
+            //export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                val firebaseVersion = "1.10.3"
+                val composeVersion = "1.5.3"
+
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                implementation("dev.gitlive:firebase-firestore:${firebaseVersion}")
+                implementation("dev.gitlive:firebase-common:${firebaseVersion}")
+                implementation("dev.gitlive:firebase-auth:${firebaseVersion}")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+                implementation("org.jetbrains.compose.material:material-icons-extended:$composeVersion")
+                //api("dev.icerock.moko:resources:0.23.0")
             }
         }
         val androidMain by getting {
@@ -49,7 +62,7 @@ kotlin {
 
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.myapplication.common"
+    namespace = "vara17.LoginFirebaseKMMApp"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
@@ -65,4 +78,9 @@ android {
     kotlin {
         jvmToolchain(17)
     }
+
+    /*multiplatformResources {
+        multiplatformResourcesPackage = "vara17.LoginFirebaseKMMApp"
+        //multiplatformResourcesClassName = "SharedRes"
+    }*/
 }
