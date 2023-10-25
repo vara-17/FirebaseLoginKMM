@@ -14,3 +14,31 @@ fun LoginTextStyle(): TextStyle {
         fontSize = 16.sp
     )
 }
+
+/*
+ * Texts
+ */
+@Composable
+fun SimpleTextStyle(): TextStyle{
+    return TextStyle(
+        color = SimpleTextColor(),
+        fontSize = 12.sp
+    )
+}
+
+@Composable
+fun TextButtonStyle(): TextStyle{
+    return TextStyle(
+        color = TextButtonColor(),
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp
+    )
+}
+
+@Composable
+fun ButtonTextStyle(): TextStyle{
+    return TextStyle(
+        color = ButtonTextColor(),
+        fontSize = 16.sp
+    )
+}

@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import res.StringTexts
 
 
 @Composable
@@ -20,7 +21,7 @@ fun Email(email: String, onTextChanged: (String) -> Unit) {
         value = email,
         onValueChange = { onTextChanged(it) },
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Email") },
+        placeholder = { Text(text = StringTexts.emailHint) },
         maxLines = 1,
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -29,7 +30,7 @@ fun Email(email: String, onTextChanged: (String) -> Unit) {
 }
 
 @Composable
-fun Password(password: String, placeholder: String = "Password", onTextChanged: (String) -> Unit) {
+fun Password(password: String, placeholder: String = StringTexts.passwordHint, onTextChanged: (String) -> Unit) {
     var passwordVisibility by remember { mutableStateOf(false) }
     TextField(
         value = password,
@@ -47,7 +48,7 @@ fun Password(password: String, placeholder: String = "Password", onTextChanged: 
                 Icons.Filled.Visibility
             }
             IconButton(onClick = {passwordVisibility = !passwordVisibility}){
-                Icon(imageVector = image, contentDescription = "Show password")
+                Icon(imageVector = image, contentDescription = null)
             }
         },
         visualTransformation = if(passwordVisibility){

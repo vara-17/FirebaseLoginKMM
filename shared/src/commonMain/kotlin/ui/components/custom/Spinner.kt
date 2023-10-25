@@ -23,6 +23,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import res.SpinnerBackgroundColor
+import res.SpinnerBackgroundViewColor
+import res.SpinnerProgressColor
 
 @Composable
 fun Spinner(showSpinner: Boolean) {
@@ -38,7 +40,7 @@ fun Spinner(showSpinner: Boolean) {
 fun BlockBox(showBlockBox: Boolean = true) {
     if (showBlockBox) {
         Box(
-            modifier = Modifier.fillMaxSize().background(SpinnerBackgroundColor())
+            modifier = Modifier.fillMaxSize().background(SpinnerBackgroundViewColor())
                 .pointerInput(Unit) {
                     detectTapGestures {
                     }
@@ -51,7 +53,7 @@ fun BlockBox(showBlockBox: Boolean = true) {
 fun CircularSpinner(
     size: Dp = 32.dp, // indicator size
     sweepAngle: Float = 90f, // angle (lenght) of indicator arc
-    color: Color = MaterialTheme.colors.primary, // color of indicator arc line
+    color: Color = SpinnerProgressColor(), // color of indicator arc line
     strokeWidth: Dp = ProgressIndicatorDefaults.StrokeWidth //width of cicle and ar lines
 ) {
     ////// animation //////
@@ -92,7 +94,7 @@ fun CircularSpinner(
     ) {
         // draw "background" (gray) circle with defined stroke.
         // without explicit center and radius it fit canvas bounds
-        drawCircle(Color.LightGray, style = stroke)
+        drawCircle(SpinnerBackgroundColor(), style = stroke)
 
         // draw arc with the same stroke
         drawArc(

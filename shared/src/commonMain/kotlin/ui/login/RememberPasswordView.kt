@@ -17,7 +17,9 @@ import domain.navigation.NavigationManager
 import res.BackgroundColor
 import ui.components.button.RememberButton
 import ui.components.cards.RememberPasswordResult
+import ui.components.custom.Spacer4
 import ui.components.custom.Spinner
+import ui.components.images.LogoImage
 import ui.components.text.RememberPasswordInfo
 import ui.components.textfield.Email
 
@@ -25,16 +27,20 @@ import ui.components.textfield.Email
 fun RememberPasswordView() {
     var rememberModel: RememberPassword by remember { mutableStateOf(RememberPassword.Success) }
     var showPopUp: Boolean by remember { mutableStateOf(rememberModel.showPopUp) }
+    var showSpinner by rememberSaveable { mutableStateOf(false) }
     Box(modifier = Modifier.fillMaxSize().background(BackgroundColor())) {
         Box(
-            Modifier.fillMaxSize().padding(12.dp)
+            modifier = Modifier.fillMaxSize().padding(12.dp)
         ) {
             RememberTopView(Modifier.align(Alignment.TopEnd))
-            RememberBodyView(Modifier.align(Alignment.Center)) {
-                rememberModel = it
-                showPopUp = rememberModel.showPopUp
-            }
+            RememberBodyView(
+                rememberModel = {
+                    rememberModel = it
+                    showPopUp = rememberModel.showPopUp
+                },
+                showSpinner = { showSpinner = it })
         }
+        Spinner(showSpinner)
         RememberPasswordResult(rememberModel, showPopUp) {
             rememberModel.showPopUp = false
             showPopUp = rememberModel.showPopUp
@@ -43,24 +49,24 @@ fun RememberPasswordView() {
 }
 
 @Composable
-fun RememberBodyView(modifier: Modifier, rememberModel: (RememberPassword) -> Unit) {
+fun RememberBodyView(rememberModel: (RememberPassword) -> Unit, showSpinner: (Boolean) -> Unit) {
     var email by rememberSaveable { mutableStateOf("") }
-    var showSpinner by rememberSaveable { mutableStateOf(false) }
-    Column(modifier = modifier.fillMaxWidth()) {
+    //var showSpinner by rememberSaveable { mutableStateOf(false) }
+    Column(modifier = Modifier.fillMaxWidth()) {
+        LogoImage()
         RememberPasswordInfo()
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer4()
         Email(email) { email = it }
-        Spacer(modifier = Modifier.size(4.dp))
-        RememberButton(email, rememberModel) { showSpinner = it }
+        Spacer4()
+        RememberButton(email, rememberModel, showSpinner)
     }
-    Spinner(showSpinner)
+    //Spinner(showSpinner)
 }
 
 @Composable
 fun RememberTopView(modifier: Modifier) {
-    IconButton(
-        modifier = modifier.size(24.dp),
+    IconButton(modifier = modifier.size(24.dp),
         onClick = { NavigationManager.setShowRememberPassword(false) }) {
-        Icon(imageVector = Icons.Filled.Close, contentDescription = "Close", tint = Color.White)
+        Icon(imageVector = Icons.Filled.Close, contentDescription = null, tint = Color.White)
     }
 }

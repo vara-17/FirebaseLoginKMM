@@ -17,9 +17,13 @@ import data.firebase.model.LoginWithEmail
 import domain.navigation.NavigationManager
 import res.BackgroundColor
 import res.LoginTextStyle
+import res.StringTexts
 import ui.components.button.RegisterButton
 import ui.components.cards.SignUpResult
+import ui.components.custom.Spacer4
+import ui.components.custom.Spacer8
 import ui.components.custom.Spinner
+import ui.components.images.LogoImage
 import ui.components.textfield.Email
 import ui.components.textfield.Password
 
@@ -27,16 +31,23 @@ import ui.components.textfield.Password
 fun SignUpEmailAndPasswordView() {
     var loginModel: LoginWithEmail by remember { mutableStateOf(LoginWithEmail.Success) }
     var showPopUp: Boolean by remember { mutableStateOf(loginModel.showPopUp) }
+    var showSpinner by rememberSaveable { mutableStateOf(false) }
     Box(modifier = Modifier.fillMaxSize().background(BackgroundColor())) {
         Box(
             Modifier.fillMaxSize().padding(12.dp)
         ) {
             SignUpTopView(Modifier.align(Alignment.TopEnd))
-            SignUpBodyView(Modifier.align(Alignment.Center)) {
-                loginModel = it
-                showPopUp = loginModel.showPopUp
+            Column {
+                LogoImage()
+                SignUpBodyView(
+                    loginModel = {
+                        loginModel = it
+                        showPopUp = loginModel.showPopUp
+                    },
+                    showSpinner = { showSpinner = it })
             }
         }
+        Spinner(showSpinner)
         SignUpResult(loginModel, showPopUp) {
             loginModel.showPopUp = false
             showPopUp = loginModel.showPopUp
@@ -54,25 +65,23 @@ fun SignUpTopView(modifier: Modifier) {
 }
 
 @Composable
-fun SignUpBodyView(modifier: Modifier, loginModel: (LoginWithEmail) -> Unit) {
+fun SignUpBodyView(loginModel: (LoginWithEmail) -> Unit, showSpinner: (Boolean) -> Unit) {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
     var confirmPassword by rememberSaveable { mutableStateOf("") }
-    var showSpinner by rememberSaveable { mutableStateOf(false) }
-    Column(modifier = modifier) {
+    Column() {
         Text(
-            text = "Registrar nuevo usuario",
+            text = StringTexts.signUpInfo,
             style = LoginTextStyle(),
             modifier = Modifier.align(Alignment.Start)
         )
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer8()
         Email(email) { email = it }
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer4()
         Password(password) { password = it }
-        Spacer(modifier = Modifier.size(4.dp))
-        Password(confirmPassword, "Confirm password") { confirmPassword = it }
-        Spacer(modifier = Modifier.size(8.dp))
-        RegisterButton(email, password, confirmPassword, loginModel) { showSpinner = it }
+        Spacer4()
+        Password(confirmPassword, StringTexts.confirmPasswordHint) { confirmPassword = it }
+        Spacer8()
+        RegisterButton(email, password, confirmPassword, loginModel, showSpinner)
     }
-    Spinner(showSpinner)
 }

@@ -1,15 +1,17 @@
 package data.firebase.model
 
+import res.StringTexts
+
 sealed class LoginWithEmail(val text: String, var showPopUp: Boolean = false){
-    object Success: LoginWithEmail("Sign in successfully.")
-    object InvalidEmail: LoginWithEmail("Email mailformed.")
-    object InvalidPassword: LoginWithEmail("Weak password.")
-    object UserDuplicated: LoginWithEmail("Email is already in use.")
-    object Unexpected: LoginWithEmail("Unexpected error. Try again later.")
+    object Success: LoginWithEmail(StringTexts.signUpSuccessInfo)
+    object InvalidEmail: LoginWithEmail(StringTexts.emailMalformedInfo)
+    object InvalidPassword: LoginWithEmail(StringTexts.signUpWeakPassword)
+    object UserDuplicated: LoginWithEmail(StringTexts.signUpEmailDuplicatedInfo)
+    object Unexpected: LoginWithEmail(StringTexts.generalErrorTryAgainInfo)
 }
 
 sealed class RememberPassword(val text: String, var showPopUp: Boolean = false){
-    object Success: RememberPassword("Email de recuperación enviado. Revisa tu correo para recuperar la contraseña.")
-    object InvalidEmail: RememberPassword("Email mailformed.")
-    object Unexpected: RememberPassword("Unexpected error. Try again later.")
+    object Success: RememberPassword(StringTexts.forgotPasswordSuccessInfo)
+    object InvalidEmail: RememberPassword(StringTexts.emailMalformedInfo)
+    object Unexpected: RememberPassword(StringTexts.generalErrorTryAgainInfo)
 }

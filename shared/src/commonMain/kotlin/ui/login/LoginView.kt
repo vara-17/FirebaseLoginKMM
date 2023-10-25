@@ -10,15 +10,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.firebase.model.FirebaseManager
 import domain.navigation.NavigationManager
 import kotlinx.coroutines.launch
 import res.BackgroundColor
+import res.SimpleTextStyle
+import res.StringTexts
+import res.TextButtonStyle
 import ui.components.button.LoginButton
-import ui.components.text.ForgotPassword
+import ui.components.custom.Spacer16
+import ui.components.custom.Spacer4
+import ui.components.custom.Spacer8
+import ui.components.images.LogoImage
+import ui.components.text.ForgotPasswordTextButton
 import ui.components.textfield.Email
 import ui.components.textfield.Password
 
@@ -28,8 +34,10 @@ fun LoginView() {
         Box(
             Modifier.fillMaxSize().padding(12.dp)
         ) {
-            LogoView(Modifier.align(Alignment.TopCenter))
-            BodyView(Modifier.align(Alignment.Center))
+            Column {
+                LogoImage()
+                BodyView()
+            }
             FooterView(Modifier.align(Alignment.BottomCenter))
         }
 
@@ -37,31 +45,20 @@ fun LoginView() {
 }
 
 @Composable
-fun LogoView(modifier: Modifier) {
-    Text(
-        text = "NameApp",
-        fontSize = 50.sp,
-        color = Color.White,
-        modifier = modifier.padding(vertical = 100.dp),
-        fontStyle = FontStyle.Italic
-    )
-}
-
-@Composable
-fun BodyView(modifier: Modifier) {
+fun BodyView() {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
     var isLoginEnabled by rememberSaveable { mutableStateOf(false) }
 
-    Column(modifier = modifier) {
+    Column() {
         Email(email) { email = it }
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer4()
         Password(password) { password = it }
-        Spacer(modifier = Modifier.size(8.dp))
-        ForgotPassword(Modifier.align(Alignment.End))
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer8()
+        ForgotPasswordTextButton(Modifier.align(Alignment.End))
+        Spacer16()
         LoginButton(email, password)
-        //Spacer(modifier = Modifier.size(16.dp))
+        //Spacer16()
         //GoogleLogin()
     }
 }
@@ -71,26 +68,24 @@ fun FooterView(modifier: Modifier) {
     val composableScope = rememberCoroutineScope()
     Column(modifier = modifier.fillMaxWidth()) {
         Divider(modifier = Modifier.background(Color.White).height(1.dp).fillMaxWidth())
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer8()
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Don't have an account?",
-                fontSize = 12.sp,
-                color = Color.White
+                text = StringTexts.notAccount,
+                style = SimpleTextStyle()
             )
             Text(
-                text = "Sign up.",
+                text = StringTexts.signUp,
                 modifier = Modifier.padding(horizontal = 8.dp).clickable {
                     composableScope.launch {
                         FirebaseManager.signOut()
                         NavigationManager.setShowSignUpView(true)
                     }
                 },
-                fontSize = 12.sp,
-                color = Color(0xFF4EA8E9)
+                style = TextButtonStyle()
             )
         }
     }

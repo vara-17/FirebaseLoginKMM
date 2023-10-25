@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import res.ImagesPaths
 import res.LoginTextStyle
 
 
@@ -21,11 +22,11 @@ fun GoogleLogin() {
         horizontalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource("MR/images/ic_google.xml"),
-            contentDescription = "Sign in with Google",
+            painter = painterResource(ImagesPaths.googleImage),
+            contentDescription = null,
             modifier = Modifier.size(24.dp)
         )
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer4()
         Text(text = "Sign in with Google account", style = LoginTextStyle())
     }
 }

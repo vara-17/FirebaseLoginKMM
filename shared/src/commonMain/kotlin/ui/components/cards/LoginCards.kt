@@ -5,7 +5,6 @@ import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -31,7 +30,10 @@ import data.firebase.model.RememberPassword
 import domain.navigation.NavigationManager
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import res.ImagesPaths
+import res.StringTexts
+import ui.components.custom.Spacer12
+import ui.components.images.LoginPopUpImage
 
 
 @OptIn(ExperimentalResourceApi::class)
@@ -64,14 +66,15 @@ fun RememberPasswordResult(model: RememberPassword, show: Boolean, closePopUp: (
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
+                    LoginPopUpImage(getRememberPasswordResultIcon(model))
+                    /*Image(
                         painter = painterResource(getRememberPasswordResultIcon(model)),
                         contentDescription = null,
                         modifier = Modifier.size(36.dp)
-                    )
-                    Spacer(modifier = Modifier.size(12.dp))
+                    )*/
+                    Spacer12()
                     Text(text = model.text, color = Color.Black)
-                    Spacer(modifier = Modifier.size(12.dp))
+                    Spacer12()
                     Text(
                         text = getRememberPasswordResultTextButton(model),
                         fontSize = 16.sp,
@@ -84,11 +87,9 @@ fun RememberPasswordResult(model: RememberPassword, show: Boolean, closePopUp: (
                                     composableScope.launch {
                                         FirebaseManager.signOut()
                                     }
-                                    closePopUp()
                                     NavigationManager.setShowRememberPassword(false)
-                                } else {
-                                    closePopUp()
                                 }
+                                closePopUp()
                             })
                     )
                 }
@@ -98,16 +99,16 @@ fun RememberPasswordResult(model: RememberPassword, show: Boolean, closePopUp: (
 }
 
 private fun getRememberPasswordResultIcon(model: RememberPassword): String {
-    return "MR/images/" + when (model) {
-        RememberPassword.Success -> "ic_send_email.xml"
-        else -> "ic_error.xml"
+    return when (model) {
+        RememberPassword.Success -> ImagesPaths.ic_send_email
+        else -> ImagesPaths.ic_error
     }
 }
 
 private fun getRememberPasswordResultTextButton(model: RememberPassword): String {
     return when (model) {
-        RememberPassword.Success -> "Volver"
-        else -> "Reintentar"
+        RememberPassword.Success -> StringTexts.back
+        else -> StringTexts.tryAgain
     }
 }
 
@@ -142,14 +143,15 @@ fun SignUpResult(model: LoginWithEmail, show: Boolean, closePopUp: () -> Unit) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
+                    LoginPopUpImage(getSignUpResultIcon(model))
+                    /*Image(
                         painter = painterResource(getSignUpResultIcon(model)),
                         contentDescription = null,
                         modifier = Modifier.size(36.dp)
-                    )
-                    Spacer(modifier = Modifier.size(12.dp))
+                    )*/
+                    Spacer12()
                     Text(text = model.text, color = Color.Black)
-                    Spacer(modifier = Modifier.size(12.dp))
+                    Spacer12()
                     Text(
                         text = getSignUpResultTextButton(model),
                         fontSize = 16.sp,
@@ -176,15 +178,15 @@ fun SignUpResult(model: LoginWithEmail, show: Boolean, closePopUp: () -> Unit) {
 }
 
 private fun getSignUpResultIcon(model: LoginWithEmail): String {
-    return "MR/images/" + when (model) {
-        LoginWithEmail.Success -> "ic_success.xml"
-        else -> "ic_error.xml"
+    return when (model) {
+        LoginWithEmail.Success -> ImagesPaths.ic_success
+        else -> ImagesPaths.ic_error
     }
 }
 
 private fun getSignUpResultTextButton(model: LoginWithEmail): String {
     return when (model) {
-        LoginWithEmail.Success -> "Volver"
-        else -> "Reintentar"
+        LoginWithEmail.Success -> StringTexts.back
+        else -> StringTexts.tryAgain
     }
 }

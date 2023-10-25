@@ -12,6 +12,9 @@ import data.firebase.model.RememberPassword
 import dev.gitlive.firebase.auth.*
 import domain.utils.TextUtils
 import kotlinx.coroutines.launch
+import res.ButtonBackgroundColor
+import res.ButtonTextStyle
+import res.StringTexts
 
 
 @Composable
@@ -24,23 +27,23 @@ fun LoginButton(email2: String, password2: String) {
             composableScope.launch {
                 FirebaseManager.signInEmailAndPassword(email, password)
             }
-            //}, enabled = loginEnabled, modifier = Modifier.fillMaxWidth()
-        }, enabled = enableLogin(email, password), modifier = Modifier.fillMaxWidth()
+        },
+        //enabled = enableLogin(email, password),
+        enabled = TextUtils.checkEmail(email) && TextUtils.checkPassword(password),
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonBackgroundColor()
     ) {
-        Text(text = "Sign in")
+        Text(
+            text = StringTexts.logIn,
+            style = ButtonTextStyle()
+        )
     }
 }
 
-fun enableLogin(email: String, password: String): Boolean {
-    return TextUtils.checkEmail(email)
-            && TextUtils.checkPassword(password)
-}
 
 @Composable
 fun RememberButton(
-    email2: String,
-    rememberModel: (RememberPassword) -> Unit,
-    showSpinner: (Boolean) -> Unit
+    email2: String, rememberModel: (RememberPassword) -> Unit, showSpinner: (Boolean) -> Unit
 ) {
     val composableScope = rememberCoroutineScope()
     val email = "varaandres17@gmail.com"
@@ -63,21 +66,25 @@ fun RememberButton(
                             result = RememberPassword.Unexpected
                         }
                     }
-                }finally {
+                } finally {
                     result.showPopUp = true
                     showSpinner(false)
                     rememberModel(result)
                 }
             }
-       // }, enabled = enableRemember(email), modifier = Modifier.fillMaxWidth()
-        }, enabled = true, modifier = Modifier.fillMaxWidth()
+            // }, enabled = enableRemember(email), modifier = Modifier.fillMaxWidth()
+            // }, enabled = TextUtils.checkEmail(email), modifier = Modifier.fillMaxWidth()
+        }, enabled = true, modifier = Modifier.fillMaxWidth(),
+        colors = ButtonBackgroundColor()
     ) {
-        Text(text = "Enviar")
+        Text(
+            text = StringTexts.send,
+            style = ButtonTextStyle()
+        )
     }
 }
 
 fun enableRemember(email: String): Boolean = TextUtils.checkEmail(email)
-
 
 
 @Composable
@@ -118,15 +125,15 @@ fun RegisterButton(
                 }
             }
         },
-        enabled = enableRegister(email, password, confirmPassword),
-        modifier = Modifier.fillMaxWidth()
+        enabled = TextUtils.checkEmail(email) &&
+                TextUtils.checkPassword(password) &&
+                TextUtils.checkPasswordAndConfirmPassword(password, confirmPassword),
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonBackgroundColor()
     ) {
-        Text(text = "Registrar")
+        Text(
+            text = StringTexts.register,
+            style = ButtonTextStyle()
+        )
     }
-}
-
-fun enableRegister(email: String, password: String, confirmPassword: String): Boolean {
-    return TextUtils.checkEmail(email) && TextUtils.checkPassword(password) && TextUtils.checkPasswordAndConfirmPassword(
-        password, confirmPassword
-    )
 }

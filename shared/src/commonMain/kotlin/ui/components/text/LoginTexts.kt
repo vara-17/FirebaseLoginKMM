@@ -9,22 +9,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import domain.navigation.NavigationManager
+import res.StringTexts
+import res.TextButtonStyle
 
 @Composable
-fun ForgotPassword(modifier: Modifier) {
+fun ForgotPasswordTextButton(modifier: Modifier) {
     Text(
-        text = "Forgot password?",
+        text = StringTexts.forgotPassword,
         modifier = modifier.clickable { NavigationManager.setShowRememberPassword(true) },
-        fontSize = 12.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color(0xFF4EA8E9)
+        style = TextButtonStyle()
     )
 }
 
 @Composable
 fun RememberPasswordInfo(){
     Text(
-        text = "Introduce el email de tu cuenta. Te enviaremos un correo para recuperar la contraseña.",
+        text = StringTexts.forgotPasswordInfo,
         modifier = Modifier.fillMaxWidth(),
         fontSize = 16.sp,
         fontWeight = FontWeight.Medium,
