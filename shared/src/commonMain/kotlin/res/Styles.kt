@@ -25,6 +25,14 @@ fun SimpleTextStyle(): TextStyle{
         fontSize = 12.sp
     )
 }
+@Composable
+fun InfoTextStyle(): TextStyle{
+    return TextStyle(
+        color = SimpleTextColor(),
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp
+    )
+}
 
 @Composable
 fun TextButtonStyle(): TextStyle{

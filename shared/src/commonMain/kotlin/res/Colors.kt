@@ -10,7 +10,7 @@ fun BackgroundColor(): Color {
     return Color(0xBB000000)
 }
 
-fun SpinnerBackgroundColor2(): Color{
+fun SpinnerBackgroundColor2(): Color {
     return Color(0xAA000000)
 }
 
@@ -18,25 +18,29 @@ fun SpinnerBackgroundColor2(): Color{
 /*
  * Views
  */
-fun BackgroundViewColor(): Color{
+fun BackgroundViewColor(): Color {
     return Color(0XBB000000)
 }
 
 /*
  * Icon tint
  */
-fun LoguinIconColor(): Color{
+fun LoguinIconColor(): Color {
     return Color.White
 }
 
-fun LoguinPopUpIconColor(): Color{
+fun LoguinPopUpIconColor(): Color {
     return Color.Black
+}
+
+fun LoguinCloseIconColor(): Color {
+    return Color.White
 }
 
 /*
  * Text
  */
-fun SimpleTextColor(): Color{
+fun SimpleTextColor(): Color {
     return Color.White
 }
 
@@ -48,25 +52,36 @@ fun ButtonBackgroundColor(): ButtonColors {
     return ButtonDefaults.buttonColors(backgroundColor = Color(0xFFE4D8B4))
 }
 
-fun TextButtonColor(): Color{
+fun TextButtonColor(): Color {
     return Color(0xFF4EA8E9)
 }
 
-fun ButtonTextColor(): Color{
+fun ButtonTextColor(): Color {
     return Color.White
 }
 
 /*
  * Spinner
  */
-fun SpinnerBackgroundColor(): Color{
+fun SpinnerBackgroundColor(): Color {
     return Color.Black
 }
 
-fun SpinnerProgressColor(): Color{
+fun SpinnerProgressColor(): Color {
     return Color(0xFF0DBBBF)
 }
 
-fun SpinnerBackgroundViewColor(): Color{
+fun SpinnerBackgroundViewColor(): Color {
     return Color(0x33000000)
+}
+
+/*
+ * TextFields
+ */
+fun TextFieldTextColor(): Color {
+    return Color(0xFFB2B2B2)
+}
+
+fun TextFieldBackgroundColor(): Color {
+    return Color(0xFFFAFAFA)
 }

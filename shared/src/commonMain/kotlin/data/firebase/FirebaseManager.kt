@@ -35,8 +35,8 @@ object FirebaseManager {
     */
     suspend fun signInEmailAndPassword(email: String, password: String) {
         val result: AuthResult = auth.signInWithEmailAndPassword(
-            "varaandres17@gmail.com",
-            "123456"
+            email,
+            password
         )
         _isUserLogged.value = auth.currentUser != null
         user = UserData(auth.currentUser?.uid ?: "")
@@ -62,7 +62,7 @@ object FirebaseManager {
     /*
      * Remember password methods
      */
-    suspend fun rememberPassword(email: String){
+    suspend fun rememberPassword(email: String) {
         FirebaseRegister.rememberPassword(auth, email)
     }
 

@@ -39,12 +39,8 @@ fun Spinner(showSpinner: Boolean) {
 @Composable
 fun BlockBox(showBlockBox: Boolean = true) {
     if (showBlockBox) {
-        Box(
-            modifier = Modifier.fillMaxSize().background(SpinnerBackgroundViewColor())
-                .pointerInput(Unit) {
-                    detectTapGestures {
-                    }
-                })
+        Box(modifier = Modifier.fillMaxSize().background(SpinnerBackgroundViewColor())
+                .pointerInput(Unit) { detectTapGestures {} })
     }
 }
 

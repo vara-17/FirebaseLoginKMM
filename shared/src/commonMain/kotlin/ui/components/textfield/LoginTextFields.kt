@@ -13,6 +13,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import res.StringTexts
+import res.TextFieldBackgroundColor
+import res.TextFieldTextColor
 
 
 @Composable
@@ -66,8 +68,8 @@ fun Password(password: String, placeholder: String = StringTexts.passwordHint, o
 @Composable
 fun LoginTextFieldDefaults(): TextFieldColors {
     return TextFieldDefaults.textFieldColors(
-        textColor = Color(0xFFB2B2B2),
-        backgroundColor = Color(0xFFFAFAFA),
+        textColor = TextFieldTextColor(),
+        backgroundColor = TextFieldBackgroundColor(),
         focusedIndicatorColor = Color.Transparent,
         unfocusedIndicatorColor = Color.Transparent)
 }

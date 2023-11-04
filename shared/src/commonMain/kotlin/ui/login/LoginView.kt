@@ -15,11 +15,9 @@ import androidx.compose.ui.unit.sp
 import data.firebase.model.FirebaseManager
 import domain.navigation.NavigationManager
 import kotlinx.coroutines.launch
-import res.BackgroundColor
-import res.SimpleTextStyle
-import res.StringTexts
-import res.TextButtonStyle
+import res.*
 import ui.components.button.LoginButton
+import ui.components.custom.GoogleLogin
 import ui.components.custom.Spacer16
 import ui.components.custom.Spacer4
 import ui.components.custom.Spacer8
@@ -32,7 +30,7 @@ import ui.components.textfield.Password
 fun LoginView() {
     Box(Modifier.fillMaxSize().background(BackgroundColor())) {
         Box(
-            Modifier.fillMaxSize().padding(12.dp)
+            Modifier.fillMaxSize().padding(ViewGeneralPadding())
         ) {
             Column {
                 LogoImage()
@@ -48,7 +46,6 @@ fun LoginView() {
 fun BodyView() {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    var isLoginEnabled by rememberSaveable { mutableStateOf(false) }
 
     Column() {
         Email(email) { email = it }

@@ -67,11 +67,6 @@ fun RememberPasswordResult(model: RememberPassword, show: Boolean, closePopUp: (
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     LoginPopUpImage(getRememberPasswordResultIcon(model))
-                    /*Image(
-                        painter = painterResource(getRememberPasswordResultIcon(model)),
-                        contentDescription = null,
-                        modifier = Modifier.size(36.dp)
-                    )*/
                     Spacer12()
                     Text(text = model.text, color = Color.Black)
                     Spacer12()
@@ -144,11 +139,6 @@ fun SignUpResult(model: LoginWithEmail, show: Boolean, closePopUp: () -> Unit) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     LoginPopUpImage(getSignUpResultIcon(model))
-                    /*Image(
-                        painter = painterResource(getSignUpResultIcon(model)),
-                        contentDescription = null,
-                        modifier = Modifier.size(36.dp)
-                    )*/
                     Spacer12()
                     Text(text = model.text, color = Color.Black)
                     Spacer12()

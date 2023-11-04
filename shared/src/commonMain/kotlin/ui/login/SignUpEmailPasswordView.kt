@@ -15,14 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import data.firebase.model.LoginWithEmail
 import domain.navigation.NavigationManager
-import res.BackgroundColor
-import res.LoginTextStyle
-import res.StringTexts
+import res.*
 import ui.components.button.RegisterButton
 import ui.components.cards.SignUpResult
 import ui.components.custom.Spacer4
 import ui.components.custom.Spacer8
 import ui.components.custom.Spinner
+import ui.components.images.LoginCloseButtonIcon
+import ui.components.images.LoginCloseIcon
 import ui.components.images.LogoImage
 import ui.components.textfield.Email
 import ui.components.textfield.Password
@@ -34,7 +34,7 @@ fun SignUpEmailAndPasswordView() {
     var showSpinner by rememberSaveable { mutableStateOf(false) }
     Box(modifier = Modifier.fillMaxSize().background(BackgroundColor())) {
         Box(
-            Modifier.fillMaxSize().padding(12.dp)
+            Modifier.fillMaxSize().padding(ViewGeneralPadding())
         ) {
             SignUpTopView(Modifier.align(Alignment.TopEnd))
             Column {
@@ -58,9 +58,8 @@ fun SignUpEmailAndPasswordView() {
 
 @Composable
 fun SignUpTopView(modifier: Modifier) {
-    IconButton(modifier = modifier.size(24.dp),
-        onClick = { NavigationManager.setShowSignUpView(false) }) {
-        Icon(imageVector = Icons.Filled.Close, contentDescription = "Close", tint = Color.White)
+    LoginCloseButtonIcon(modifier.size(CloseButtonSize())) {
+        NavigationManager.setShowSignUpView(false)
     }
 }
 

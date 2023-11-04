@@ -14,6 +14,7 @@ import data.firebase.model.FirebaseManager
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import res.BackgroundColor
+import res.ViewGeneralPadding
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -21,7 +22,7 @@ fun UserLoggedView() {
     val composableScope = rememberCoroutineScope()
     Box(modifier = Modifier.fillMaxSize().background(BackgroundColor())) {
         Box(
-            Modifier.fillMaxSize().padding(12.dp)
+            Modifier.fillMaxSize().padding(ViewGeneralPadding())
         ) {
             Text(
                 text = "User logged in!\n\n\n\n\n",

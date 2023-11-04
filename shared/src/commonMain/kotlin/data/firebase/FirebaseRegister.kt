@@ -14,7 +14,8 @@ class FirebaseRegister {
 
         suspend fun rememberPassword(
             auth: FirebaseAuth,
-            email: String) = auth.sendPasswordResetEmail(email)
+            email: String
+        ) = auth.sendPasswordResetEmail(email)
 
     }
 }

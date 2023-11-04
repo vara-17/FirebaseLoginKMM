@@ -14,11 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import data.firebase.model.RememberPassword
 import domain.navigation.NavigationManager
-import res.BackgroundColor
+import res.*
 import ui.components.button.RememberButton
 import ui.components.cards.RememberPasswordResult
 import ui.components.custom.Spacer4
 import ui.components.custom.Spinner
+import ui.components.images.LoginCloseButtonIcon
 import ui.components.images.LogoImage
 import ui.components.text.RememberPasswordInfo
 import ui.components.textfield.Email
@@ -30,7 +31,7 @@ fun RememberPasswordView() {
     var showSpinner by rememberSaveable { mutableStateOf(false) }
     Box(modifier = Modifier.fillMaxSize().background(BackgroundColor())) {
         Box(
-            modifier = Modifier.fillMaxSize().padding(12.dp)
+            modifier = Modifier.fillMaxSize().padding(ViewGeneralPadding())
         ) {
             RememberTopView(Modifier.align(Alignment.TopEnd))
             RememberBodyView(
@@ -51,7 +52,6 @@ fun RememberPasswordView() {
 @Composable
 fun RememberBodyView(rememberModel: (RememberPassword) -> Unit, showSpinner: (Boolean) -> Unit) {
     var email by rememberSaveable { mutableStateOf("") }
-    //var showSpinner by rememberSaveable { mutableStateOf(false) }
     Column(modifier = Modifier.fillMaxWidth()) {
         LogoImage()
         RememberPasswordInfo()
@@ -60,13 +60,11 @@ fun RememberBodyView(rememberModel: (RememberPassword) -> Unit, showSpinner: (Bo
         Spacer4()
         RememberButton(email, rememberModel, showSpinner)
     }
-    //Spinner(showSpinner)
 }
 
 @Composable
 fun RememberTopView(modifier: Modifier) {
-    IconButton(modifier = modifier.size(24.dp),
-        onClick = { NavigationManager.setShowRememberPassword(false) }) {
-        Icon(imageVector = Icons.Filled.Close, contentDescription = null, tint = Color.White)
+    LoginCloseButtonIcon(modifier.size(CloseButtonSize())) {
+        NavigationManager.setShowRememberPassword(false)
     }
 }

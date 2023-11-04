@@ -18,17 +18,14 @@ import res.StringTexts
 
 
 @Composable
-fun LoginButton(email2: String, password2: String) {
+fun LoginButton(email: String, password: String) {
     val composableScope = rememberCoroutineScope()
-    val email = "varaandres17@gmail.com"
-    val password = "123456"
     Button(
         onClick = {
             composableScope.launch {
                 FirebaseManager.signInEmailAndPassword(email, password)
             }
         },
-        //enabled = enableLogin(email, password),
         enabled = TextUtils.checkEmail(email) && TextUtils.checkPassword(password),
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonBackgroundColor()
@@ -43,10 +40,9 @@ fun LoginButton(email2: String, password2: String) {
 
 @Composable
 fun RememberButton(
-    email2: String, rememberModel: (RememberPassword) -> Unit, showSpinner: (Boolean) -> Unit
+    email: String, rememberModel: (RememberPassword) -> Unit, showSpinner: (Boolean) -> Unit
 ) {
     val composableScope = rememberCoroutineScope()
-    val email = "varaandres17@gmail.com"
     var result: RememberPassword = RememberPassword.Success
     Button(
         onClick = {
@@ -72,9 +68,7 @@ fun RememberButton(
                     rememberModel(result)
                 }
             }
-            // }, enabled = enableRemember(email), modifier = Modifier.fillMaxWidth()
-            // }, enabled = TextUtils.checkEmail(email), modifier = Modifier.fillMaxWidth()
-        }, enabled = true, modifier = Modifier.fillMaxWidth(),
+        }, enabled = TextUtils.checkEmail(email), modifier = Modifier.fillMaxWidth(),
         colors = ButtonBackgroundColor()
     ) {
         Text(
@@ -83,9 +77,6 @@ fun RememberButton(
         )
     }
 }
-
-fun enableRemember(email: String): Boolean = TextUtils.checkEmail(email)
-
 
 @Composable
 fun RegisterButton(

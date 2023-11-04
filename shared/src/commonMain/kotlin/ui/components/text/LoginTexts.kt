@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import domain.navigation.NavigationManager
+import res.InfoTextStyle
 import res.StringTexts
 import res.TextButtonStyle
 
@@ -26,8 +27,6 @@ fun RememberPasswordInfo(){
     Text(
         text = StringTexts.forgotPasswordInfo,
         modifier = Modifier.fillMaxWidth(),
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Medium,
-        color = Color.White
+        style = InfoTextStyle()
     )
 }
